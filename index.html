@@ -896,10 +896,12 @@
                 return;
             }
             
-            resultsDiv.innerHTML = matches.map(match => `
+            resultsDiv.innerHTML = matches.map(match => {
+                const isExactMatch = match.matchedCount === match.totalInput && match.extraSpicules === 0;
+                return `
                 <div class="match-card" onclick="showSampleDetail('${match.sampleId}')">
                     <span class="match-score">${match.matchedCount}/${match.totalInput} of your spicules found</span>
-                    ${match.matchedCount === match.totalInput && match.extraSpicules === 0
+                    ${isExactMatch
                         ? `<span class="match-score" style="background: #00cc66; margin-left: 10px;">Exact match!</span>`
                         : match.extraSpicules > 0 
                             ? `<span class="match-score" style="background: #ff6b6b; margin-left: 10px;">+${match.extraSpicules} extra types in sample</span>`
@@ -948,7 +950,7 @@
                         Click to view all images →
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         // Form submission
