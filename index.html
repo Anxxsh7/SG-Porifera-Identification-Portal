@@ -513,6 +513,9 @@
                 } else if (major === 'sigma') {
                     // c-sigma is the full name, not c-sigmasigma
                     return subtype;
+                } else if (major === 'spiraster') {
+                    // thin spiraster needs space separator
+                    return subtype ? `${subtype} ${major}` : major;
                 } else {
                     return `${subtype}${major}`;
                 }
@@ -633,11 +636,12 @@
                         
                         // Check multi-size requirement
                         if (spicule.hasVariation) {
-                            if (multiVariation[baseType]) {
-                                if (!multiVariation[baseType].includes(sampleId)) {
-                                    multiSizeMatched = false;
-                                }
-                            } else {
+                            // Try both key formats: "baseType" and "baseType_multi_size.txt"
+                            const mvKey1 = baseType;
+                            const mvKey2 = `${baseType}_multi_size.txt`;
+                            const mvKey3 = baseType.replace(/_/g, ' ');
+                            const mvSamples = multiVariation[mvKey1] || multiVariation[mvKey2] || multiVariation[mvKey3] || [];
+                            if (mvSamples.length === 0 || !mvSamples.includes(sampleId)) {
                                 multiSizeMatched = false;
                             }
                         }
