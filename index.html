@@ -601,12 +601,18 @@
                             }
                         }
                         
-                        // For each user length, find best matching size variant
+                        // Match user lengths to size variants - each variant can only match one length
+                        const usedVariants = new Set();
+                        
                         for (const userLen of userLengths) {
                             let bestMatch = null;
                             let bestCloseness = -1;
+                            let bestIdx = -1;
                             
-                            for (const { sizeType, sizeInfo } of matchingSizeTypes) {
+                            for (let i = 0; i < matchingSizeTypes.length; i++) {
+                                if (usedVariants.has(i)) continue; // Skip already matched variants
+                                
+                                const { sizeType, sizeInfo } = matchingSizeTypes[i];
                                 const minLen = sizeInfo.min || 0;
                                 const maxLen = sizeInfo.max || Infinity;
                                 const avgLen = sizeInfo.avg || 0;
@@ -620,11 +626,13 @@
                                     if (closeness > bestCloseness) {
                                         bestCloseness = closeness;
                                         bestMatch = { sizeType, sizeInfo, closeness };
+                                        bestIdx = i;
                                     }
                                 }
                             }
                             
-                            if (bestMatch) {
+                            if (bestMatch && bestIdx >= 0) {
+                                usedVariants.add(bestIdx); // Mark this variant as used
                                 sizeMatchScore += bestMatch.closeness;
                                 sizeMatchCount++;
                                 sizeDetails.push({
@@ -635,13 +643,17 @@
                                     match: true
                                 });
                             } else if (matchingSizeTypes.length > 0) {
-                                // No match found - add first one as non-match for display
-                                const first = matchingSizeTypes[0];
+                                // No match found - show closest unmatched variant
+                                let showIdx = 0;
+                                for (let i = 0; i < matchingSizeTypes.length; i++) {
+                                    if (!usedVariants.has(i)) { showIdx = i; break; }
+                                }
+                                const show = matchingSizeTypes[showIdx];
                                 sizeDetails.push({
-                                    type: first.sizeType,
+                                    type: show.sizeType,
                                     user: userLen,
-                                    range: `${first.sizeInfo.min.toFixed(1)}-${first.sizeInfo.max.toFixed(1)}`,
-                                    avg: first.sizeInfo.avg,
+                                    range: `${show.sizeInfo.min.toFixed(1)}-${show.sizeInfo.max.toFixed(1)}`,
+                                    avg: show.sizeInfo.avg,
                                     match: false
                                 });
                             }
