@@ -572,7 +572,7 @@
                 for (const spicule of inputSpicules) {
                     const inputType = spicule.name.toLowerCase().replace(/ /g, '_').replace(/-/g, '_');
                     const baseType = getBaseSpiculeType(inputType);
-                    const userLength = spicule.length;
+                    const userLengths = [spicule.length, spicule.length2].filter(l => l).map(l => parseFloat(l)).filter(l => !isNaN(l));
                     
                     let typeFound = false;
                     for (const sampleType of sampleTypes) {
@@ -586,51 +586,64 @@
                         inputMatches++;
                         matchedInput.push(inputType);
                         
-                        // Check size match
-                        if (userLength) {
-                            const userLen = parseFloat(userLength);
-                            if (!isNaN(userLen)) {
-                                for (const [sizeType, sizeInfo] of Object.entries(sampleSizeData)) {
-                                    const sizeTypeNorm = sizeType.toLowerCase().replace(/-/g, '_').replace(/ /g, '_');
-                                    const base = baseType.replace(/_/g, '');
-                                    const sizeBase = sizeTypeNorm.replace(/_/g, '');
-                                    
-                                    const typeMatches = base.includes(sizeBase) || sizeBase.includes(base) ||
-                                                       spiculeTypesMatch(inputType, sizeTypeNorm);
-                                    
-                                    if (typeMatches) {
-                                        const minLen = sizeInfo.min || 0;
-                                        const maxLen = sizeInfo.max || Infinity;
-                                        const avgLen = sizeInfo.avg || 0;
-                                        
-                                        const tolerance = 0.2;
-                                        const rangeMin = minLen * (1 - tolerance);
-                                        const rangeMax = maxLen * (1 + tolerance);
-                                        
-                                        if (userLen >= rangeMin && userLen <= rangeMax) {
-                                            if (avgLen > 0) {
-                                                const closeness = 1 - Math.min(Math.abs(userLen - avgLen) / avgLen, 1);
-                                                sizeMatchScore += closeness;
-                                            }
-                                            sizeMatchCount++;
-                                            sizeDetails.push({
-                                                type: sizeType,
-                                                user: userLen,
-                                                range: `${minLen.toFixed(1)}-${maxLen.toFixed(1)}`,
-                                                avg: avgLen,
-                                                match: true
-                                            });
-                                        } else {
-                                            sizeDetails.push({
-                                                type: sizeType,
-                                                user: userLen,
-                                                range: `${minLen.toFixed(1)}-${maxLen.toFixed(1)}`,
-                                                avg: avgLen,
-                                                match: false
-                                            });
-                                        }
+                        // Check size match - collect all matching size types for this base type
+                        const matchingSizeTypes = [];
+                        for (const [sizeType, sizeInfo] of Object.entries(sampleSizeData)) {
+                            const sizeTypeNorm = sizeType.toLowerCase().replace(/-/g, '_').replace(/ /g, '_');
+                            const base = baseType.replace(/_/g, '');
+                            const sizeBase = sizeTypeNorm.replace(/_/g, '');
+                            
+                            const typeMatches = base.includes(sizeBase) || sizeBase.includes(base) ||
+                                               spiculeTypesMatch(inputType, sizeTypeNorm);
+                            
+                            if (typeMatches) {
+                                matchingSizeTypes.push({ sizeType, sizeInfo });
+                            }
+                        }
+                        
+                        // For each user length, find best matching size variant
+                        for (const userLen of userLengths) {
+                            let bestMatch = null;
+                            let bestCloseness = -1;
+                            
+                            for (const { sizeType, sizeInfo } of matchingSizeTypes) {
+                                const minLen = sizeInfo.min || 0;
+                                const maxLen = sizeInfo.max || Infinity;
+                                const avgLen = sizeInfo.avg || 0;
+                                
+                                const tolerance = 0.2;
+                                const rangeMin = minLen * (1 - tolerance);
+                                const rangeMax = maxLen * (1 + tolerance);
+                                
+                                if (userLen >= rangeMin && userLen <= rangeMax) {
+                                    const closeness = avgLen > 0 ? (1 - Math.min(Math.abs(userLen - avgLen) / avgLen, 1)) : 0.5;
+                                    if (closeness > bestCloseness) {
+                                        bestCloseness = closeness;
+                                        bestMatch = { sizeType, sizeInfo, closeness };
                                     }
                                 }
+                            }
+                            
+                            if (bestMatch) {
+                                sizeMatchScore += bestMatch.closeness;
+                                sizeMatchCount++;
+                                sizeDetails.push({
+                                    type: bestMatch.sizeType,
+                                    user: userLen,
+                                    range: `${bestMatch.sizeInfo.min.toFixed(1)}-${bestMatch.sizeInfo.max.toFixed(1)}`,
+                                    avg: bestMatch.sizeInfo.avg,
+                                    match: true
+                                });
+                            } else if (matchingSizeTypes.length > 0) {
+                                // No match found - add first one as non-match for display
+                                const first = matchingSizeTypes[0];
+                                sizeDetails.push({
+                                    type: first.sizeType,
+                                    user: userLen,
+                                    range: `${first.sizeInfo.min.toFixed(1)}-${first.sizeInfo.max.toFixed(1)}`,
+                                    avg: first.sizeInfo.avg,
+                                    match: false
+                                });
                             }
                         }
                         
@@ -936,6 +949,7 @@
                 const major = card.querySelector(`select[name="spicule_${num}_major"]`).value;
                 const subtype = card.querySelector(`select[name="spicule_${num}_subtype"]`).value;
                 const length = card.querySelector(`input[name="spicule_${num}_length"]`).value;
+                const length2 = card.querySelector(`input[name="spicule_${num}_length2"]`).value;
                 const hasVariation = card.querySelector(`input[name="spicule_${num}_has_variation"]`).checked;
                 
                 if (major) {
@@ -944,6 +958,7 @@
                         major,
                         subtype,
                         length,
+                        length2,
                         hasVariation
                     });
                 }
