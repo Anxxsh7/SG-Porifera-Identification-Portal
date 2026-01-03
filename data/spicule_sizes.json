@@ -1,0 +1,938 @@
+{
+  "ZRC0802": {
+    "oxea": {
+      "min": 208.6,
+      "max": 258.2,
+      "avg": 234.72,
+      "count": 5
+    },
+    "raphide": {
+      "min": 93.66,
+      "max": 125.4,
+      "avg": 109.33,
+      "count": 5
+    }
+  },
+  "ZRC0805": {
+    "small tylostyle": {
+      "min": 173.1,
+      "max": 279.0,
+      "avg": 225.22,
+      "count": 5
+    },
+    "large tylostyle": {
+      "min": 564.3,
+      "max": 601.2,
+      "avg": 578.94,
+      "count": 5
+    }
+  },
+  "ZRC0072": {
+    "large triradiate symetrical rays": {
+      "min": 1.06,
+      "max": 847.2,
+      "avg": 486.86,
+      "count": 5
+    },
+    "small triradiate symetrical rays": {
+      "min": 130.0,
+      "max": 333.0,
+      "avg": 203.26,
+      "count": 5
+    }
+  },
+  "ZRC0018": {
+    "protruding tylostyle": {
+      "min": 194.0,
+      "max": 322.0,
+      "avg": 276.4,
+      "count": 5
+    }
+  },
+  "ZRC0545": {
+    "large oxea": {
+      "min": 1014.0,
+      "max": 1211.0,
+      "avg": 1119.6,
+      "count": 5
+    },
+    "thin tylostyle": {
+      "min": 184.2,
+      "max": 533.6,
+      "avg": 397.28,
+      "count": 5
+    },
+    "tylaster euaster": {
+      "min": 5.8,
+      "max": 9.7,
+      "avg": 7.8,
+      "count": 5
+    },
+    "pseudaster": {
+      "min": 4.8,
+      "max": 6.5,
+      "avg": 5.48,
+      "count": 5
+    },
+    "anthaster euaster": {
+      "min": 9.7,
+      "max": 13.3,
+      "avg": 11.27,
+      "count": 5
+    }
+  },
+  "ZRC0014": {
+    "tylostyle": {
+      "min": 220.0,
+      "max": 735.0,
+      "avg": 464.2,
+      "count": 5
+    }
+  },
+  "ZRC0542": {
+    "oxea": {
+      "min": 97.53,
+      "max": 204.9,
+      "avg": 150.51,
+      "count": 5
+    },
+    "rhabdostyle": {
+      "min": 125.9,
+      "max": 138.6,
+      "avg": 132.25,
+      "count": 2
+    }
+  },
+  "ZRC0815": {
+    "oxyspheraster euaster": {
+      "min": 21.71,
+      "max": 28.32,
+      "avg": 26.55,
+      "count": 5
+    },
+    "forked oxyaster": {
+      "min": 0.0,
+      "max": 24.63,
+      "avg": 18.59,
+      "count": 6
+    }
+  },
+  "ZRC0729": {
+    "tylostyle": {
+      "min": 344.0,
+      "max": 692.0,
+      "avg": 522.0,
+      "count": 5
+    }
+  },
+  "ZRC0757": {
+    "unnamed: 0": {
+      "min": 1.0,
+      "max": 5.0,
+      "avg": 3.0,
+      "count": 5
+    },
+    "oxea": {
+      "min": 254.0,
+      "max": 632.0,
+      "avg": 490.6,
+      "count": 5
+    },
+    "raphide": {
+      "min": 67.0,
+      "max": 80.0,
+      "avg": 72.0,
+      "count": 5
+    }
+  },
+  "ZRC0010": {
+    "oxea": {
+      "min": 165.0,
+      "max": 920.0,
+      "avg": 450.4,
+      "count": 5
+    }
+  },
+  "ZRC0607": {
+    "big oxea": {
+      "min": 594.8,
+      "max": 816.2,
+      "avg": 705.18,
+      "count": 5
+    },
+    "small oxea": {
+      "min": 119.0,
+      "max": 180.4,
+      "avg": 160.64,
+      "count": 5
+    },
+    "raphide": {
+      "min": 5.3,
+      "max": 8.95,
+      "avg": 6.83,
+      "count": 5
+    }
+  },
+  "ZRC0868": {
+    "oxea": {
+      "min": 404.3,
+      "max": 580.4,
+      "avg": 524.24,
+      "count": 5
+    },
+    "raphide": {
+      "min": 133.9,
+      "max": 269.3,
+      "avg": 190.04,
+      "count": 5
+    }
+  },
+  "ZRC0634": {
+    "hastate style": {
+      "min": 167.6,
+      "max": 287.3,
+      "avg": 206.26,
+      "count": 5
+    }
+  },
+  "ZRC0541": {
+    "tylostyle": {
+      "min": 460.0,
+      "max": 523.0,
+      "avg": 499.2,
+      "count": 5
+    },
+    "raphide": {
+      "min": 97.7,
+      "max": 135.0,
+      "avg": 116.26,
+      "count": 5
+    }
+  },
+  "ZRC0737": {
+    "tylostyle": {
+      "min": 61.0,
+      "max": 278.0,
+      "avg": 145.96,
+      "count": 5
+    },
+    "raphide": {
+      "min": 10.94,
+      "max": 34.8,
+      "avg": 18.61,
+      "count": 5
+    }
+  },
+  "ZRC0738": {
+    "tylostyle": {
+      "min": 77.95,
+      "max": 392.9,
+      "avg": 235.81,
+      "count": 5
+    },
+    "raphide": {
+      "min": 45.24,
+      "max": 52.8,
+      "avg": 49.19,
+      "count": 5
+    }
+  },
+  "ZRC0655": {
+    "subtylostyle": {
+      "min": 566.3,
+      "max": 692.6,
+      "avg": 605.58,
+      "count": 5
+    },
+    "thin spiraster": {
+      "min": 10.24,
+      "max": 14.39,
+      "avg": 12.88,
+      "count": 5
+    }
+  },
+  "ZRC0711": {
+    "tylostyle": {
+      "min": 318.9,
+      "max": 394.2,
+      "avg": 356.78,
+      "count": 5
+    }
+  },
+  "ZRC0548": {
+    "curved oxea": {
+      "min": 1.08,
+      "max": 931.1,
+      "avg": 530.0,
+      "count": 5
+    },
+    "spiny oxea": {
+      "min": 85.8,
+      "max": 180.4,
+      "avg": 139.16,
+      "count": 5
+    }
+  },
+  "ZRC0867": {
+    "style": {
+      "min": 204.8,
+      "max": 259.6,
+      "avg": 224.24,
+      "count": 5
+    }
+  },
+  "ZRC0550": {
+    "tylostyle": {
+      "min": 88.73,
+      "max": 99.7,
+      "avg": 93.83,
+      "count": 5
+    }
+  },
+  "ZRC0774": {
+    "oxea": {
+      "min": 500.0,
+      "max": 500.0,
+      "avg": 500.0,
+      "count": 1
+    }
+  },
+  "ZRC0767": {
+    "thick oxea": {
+      "min": 53.15,
+      "max": 292.3,
+      "avg": 162.99,
+      "count": 5
+    }
+  },
+  "ZRC0772": {
+    "oxea": {
+      "min": 441.7,
+      "max": 824.4,
+      "avg": 632.88,
+      "count": 5
+    },
+    "raphide": {
+      "min": 19.39,
+      "max": 43.75,
+      "avg": 27.29,
+      "count": 5
+    }
+  },
+  "ZRC0856": {
+    "oxea": {
+      "min": 87.56,
+      "max": 95.39,
+      "avg": 91.24,
+      "count": 5
+    },
+    "raphide": {
+      "min": 23.69,
+      "max": 27.75,
+      "avg": 25.03,
+      "count": 5
+    }
+  },
+  "ZRC0825": {
+    "thin oxea": {
+      "min": 87.4,
+      "max": 103.5,
+      "avg": 95.91,
+      "count": 5
+    },
+    "thick oxea": {
+      "min": 114.7,
+      "max": 128.7,
+      "avg": 119.72,
+      "count": 5
+    }
+  },
+  "ZRC0702": {
+    "oxea": {
+      "min": 163.5,
+      "max": 192.8,
+      "avg": 174.56,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 14.6,
+      "max": 18.8,
+      "avg": 17.11,
+      "count": 5
+    }
+  },
+  "ZRC0703": {
+    "oxea": {
+      "min": 120.5,
+      "max": 133.9,
+      "avg": 128.42,
+      "count": 5
+    },
+    "raphide": {
+      "min": 22.46,
+      "max": 24.25,
+      "avg": 23.67,
+      "count": 5
+    }
+  },
+  "ZRC0705": {
+    "strongyloxea": {
+      "min": 593.5,
+      "max": 700.4,
+      "avg": 640.08,
+      "count": 5
+    }
+  },
+  "ZRC0791": {
+    "oxea": {
+      "min": 350.0,
+      "max": 400.0,
+      "avg": 375.0,
+      "count": 2
+    }
+  },
+  "ZRC0820": {
+    "oxea": {
+      "min": 79.97,
+      "max": 106.3,
+      "avg": 95.86,
+      "count": 5
+    }
+  },
+  "ZRC0551": {
+    "oxea": {
+      "min": 84.41,
+      "max": 93.07,
+      "avg": 87.82,
+      "count": 5
+    }
+  },
+  "ZRC0671": {
+    "bent oxea": {
+      "min": 97.31,
+      "max": 107.7,
+      "avg": 103.66,
+      "count": 5
+    },
+    "raphides": {
+      "min": 67.75,
+      "max": 97.52,
+      "avg": 83.54,
+      "count": 5
+    }
+  },
+  "ZRC0760": {
+    "oxea": {
+      "min": 152.1,
+      "max": 205.4,
+      "avg": 188.5,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 13.24,
+      "max": 21.02,
+      "avg": 17.45,
+      "count": 5
+    }
+  },
+  "ZRC0759": {
+    "oxea": {
+      "min": 72.82,
+      "max": 90.87,
+      "avg": 85.79,
+      "count": 5
+    }
+  },
+  "ZRC0844": {
+    "oxea": {
+      "min": 94.65,
+      "max": 104.4,
+      "avg": 100.22,
+      "count": 5
+    },
+    "raphide": {
+      "min": 32.48,
+      "max": 39.39,
+      "avg": 36.09,
+      "count": 5
+    }
+  },
+  "ZRC0650": {
+    "anatriaene": {
+      "min": 750.8,
+      "max": 1556.0,
+      "avg": 1159.86,
+      "count": 5
+    },
+    "oxea": {
+      "min": 258.0,
+      "max": 1616.0,
+      "avg": 1208.6,
+      "count": 5
+    },
+    "small oxea": {
+      "min": 111.0,
+      "max": 255.2,
+      "avg": 197.12,
+      "count": 5
+    },
+    "tylaster euaster": {
+      "min": 8.16,
+      "max": 14.24,
+      "avg": 11.37,
+      "count": 5
+    },
+    "raphide": {
+      "min": 19.71,
+      "max": 28.82,
+      "avg": 23.81,
+      "count": 5
+    }
+  },
+  "ZRC0651": {
+    "oxyaster euaster": {
+      "min": 21.8,
+      "max": 34.42,
+      "avg": 25.38,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 9.51,
+      "max": 18.52,
+      "avg": 15.95,
+      "count": 5
+    },
+    "oxyspheraster eusaster": {
+      "min": 4.65,
+      "max": 7.1,
+      "avg": 5.74,
+      "count": 5
+    },
+    "steraster": {
+      "min": 60.05,
+      "max": 136.0,
+      "avg": 108.79,
+      "count": 5
+    }
+  },
+  "ZRC0583": {
+    "oxyaster euaster (bendy spines)": {
+      "min": 27.57,
+      "max": 121.0,
+      "avg": 47.22,
+      "count": 5
+    },
+    "raphide": {
+      "min": 6.02,
+      "max": 95.15,
+      "avg": 66.02,
+      "count": 5
+    }
+  },
+  "ZRC0811": {
+    "style": {
+      "min": 399.6,
+      "max": 506.0,
+      "avg": 434.68,
+      "count": 5
+    },
+    "oxysoheraster euaster": {
+      "min": 60.4,
+      "max": 69.35,
+      "avg": 66.25,
+      "count": 5
+    },
+    "anthaster euaster": {
+      "min": 12.77,
+      "max": 16.72,
+      "avg": 14.44,
+      "count": 5
+    }
+  },
+  "ZRC0657": {
+    "raphide": {
+      "min": 13.84,
+      "max": 25.13,
+      "avg": 19.22,
+      "count": 5
+    },
+    "tylote": {
+      "min": 273.4,
+      "max": 320.0,
+      "avg": 298.12,
+      "count": 5
+    }
+  },
+  "ZRC0554": {
+    "style": {
+      "min": 402.6,
+      "max": 446.4,
+      "avg": 425.78,
+      "count": 5
+    },
+    "cladotylote": {
+      "min": 260.5,
+      "max": 286.3,
+      "avg": 274.84,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 32.23,
+      "max": 65.24,
+      "avg": 48.7,
+      "count": 5
+    },
+    "thin strongyl": {
+      "min": 266.5,
+      "max": 673.5,
+      "avg": 442.44,
+      "count": 5
+    },
+    "diancistra": {
+      "min": 18.3,
+      "max": 22.73,
+      "avg": 21.19,
+      "count": 5
+    },
+    "raphide": {
+      "min": 21.12,
+      "max": 26.69,
+      "avg": 24.47,
+      "count": 5
+    },
+    "toxa": {
+      "min": 321.8,
+      "max": 762.0,
+      "avg": 494.84,
+      "count": 5
+    }
+  },
+  "ZRC0740": {
+    "style": {
+      "min": 137.5,
+      "max": 154.9,
+      "avg": 142.8,
+      "count": 5
+    },
+    "raphide": {
+      "min": 11.4,
+      "max": 13.9,
+      "avg": 13.08,
+      "count": 5
+    },
+    "birotulate isochela": {
+      "min": 11.2,
+      "max": 14.1,
+      "avg": 12.67,
+      "count": 5
+    }
+  },
+  "ZRC0586": {
+    "style": {
+      "min": 147.5,
+      "max": 163.4,
+      "avg": 157.64,
+      "count": 5
+    }
+  },
+  "ZRC0864": {
+    "style": {
+      "min": 145.7,
+      "max": 154.5,
+      "avg": 148.78,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 8.96,
+      "max": 12.16,
+      "avg": 10.76,
+      "count": 5
+    }
+  },
+  "ZRC0555": {
+    "subtylostyle": {
+      "min": 284.1,
+      "max": 311.7,
+      "avg": 301.5,
+      "count": 5
+    },
+    "raphide": {
+      "min": 38.22,
+      "max": 45.1,
+      "avg": 40.91,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 33.0,
+      "max": 38.0,
+      "avg": 35.22,
+      "count": 5
+    }
+  },
+  "ZRC0808": {
+    "strongyl": {
+      "min": 224.2,
+      "max": 244.1,
+      "avg": 236.58,
+      "count": 5
+    },
+    "raphide": {
+      "min": 45.1,
+      "max": 65.95,
+      "avg": 56.03,
+      "count": 5
+    }
+  },
+  "ZRC0810": {
+    "strongyl": {
+      "min": 163.0,
+      "max": 183.6,
+      "avg": 172.78,
+      "count": 5
+    },
+    "tylostyle": {
+      "min": 178.7,
+      "max": 198.0,
+      "avg": 188.7,
+      "count": 5
+    }
+  },
+  "ZRC0624": {
+    "style": {
+      "min": 124.1,
+      "max": 286.4,
+      "avg": 181.8,
+      "count": 5
+    },
+    "acanthostyle": {
+      "min": 71.86,
+      "max": 91.0,
+      "avg": 80.42,
+      "count": 5
+    },
+    "isochaela": {
+      "min": 6.85,
+      "max": 19.2,
+      "avg": 14.02,
+      "count": 5
+    },
+    "raphide": {
+      "min": 17.85,
+      "max": 38.0,
+      "avg": 26.82,
+      "count": 5
+    }
+  },
+  "ZRC0649": {
+    "style": {
+      "min": 174.1,
+      "max": 481.7,
+      "avg": 313.38,
+      "count": 5
+    },
+    "raphide": {
+      "min": 86.91,
+      "max": 126.2,
+      "avg": 107.16,
+      "count": 5
+    },
+    "toxa": {
+      "min": 48.21,
+      "max": 100.6,
+      "avg": 82.66,
+      "count": 5
+    },
+    "acanthostyle": {
+      "min": 130.2,
+      "max": 155.9,
+      "avg": 142.28,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 16.54,
+      "max": 18.07,
+      "avg": 17.38,
+      "count": 5
+    },
+    "diancistra": {
+      "min": 12.31,
+      "max": 20.83,
+      "avg": 16.12,
+      "count": 5
+    },
+    "buirotulate isochela": {
+      "min": 5.81,
+      "max": 7.73,
+      "avg": 6.42,
+      "count": 5
+    }
+  },
+  "ZRC0608": {
+    "style": {
+      "min": 1034.0,
+      "max": 1143.0,
+      "avg": 1106.6,
+      "count": 5
+    },
+    "big c-sigma": {
+      "min": 91.2,
+      "max": 104.5,
+      "avg": 95.58,
+      "count": 5
+    },
+    "small c-sigma": {
+      "min": 17.25,
+      "max": 25.26,
+      "avg": 21.27,
+      "count": 5
+    },
+    "raphide": {
+      "min": 123.9,
+      "max": 138.8,
+      "avg": 132.24,
+      "count": 5
+    }
+  },
+  "ZRC0556": {
+    "style": {
+      "min": 250.7,
+      "max": 277.6,
+      "avg": 263.92,
+      "count": 5
+    },
+    "palmate isochela": {
+      "min": 9.5,
+      "max": 11.2,
+      "avg": 10.2,
+      "count": 5
+    },
+    "palmate anisochela": {
+      "min": 18.96,
+      "max": 49.0,
+      "avg": 40.55,
+      "count": 5
+    },
+    "raphide": {
+      "min": 10.9,
+      "max": 40.15,
+      "avg": 20.38,
+      "count": 5
+    }
+  },
+  "ZRC0561": {
+    "style": {
+      "min": 530.3,
+      "max": 569.6,
+      "avg": 544.42,
+      "count": 5
+    },
+    "palmate isochela": {
+      "min": 114.5,
+      "max": 129.4,
+      "avg": 122.06,
+      "count": 5
+    },
+    "raphide": {
+      "min": 51.22,
+      "max": 74.19,
+      "avg": 64.01,
+      "count": 5
+    }
+  },
+  "ZRC0560": {
+    "tylostyle": {
+      "min": 199.5,
+      "max": 272.1,
+      "avg": 231.88,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 34.3,
+      "max": 40.0,
+      "avg": 36.95,
+      "count": 5
+    },
+    "palmate anisochela": {
+      "min": 17.0,
+      "max": 22.69,
+      "avg": 20.65,
+      "count": 5
+    }
+  },
+  "ZRC0558": {
+    "style": {
+      "min": 336.9,
+      "max": 385.1,
+      "avg": 357.44,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 79.0,
+      "max": 87.0,
+      "avg": 83.66,
+      "count": 5
+    },
+    "palmate anisochela": {
+      "min": 44.23,
+      "max": 60.03,
+      "avg": 51.3,
+      "count": 5
+    }
+  },
+  "ZRC0750": {
+    "microstrongyl": {
+      "min": 63.58,
+      "max": 90.73,
+      "avg": 78.5,
+      "count": 4
+    },
+    "oxea": {
+      "min": 293.1,
+      "max": 338.4,
+      "avg": 318.57,
+      "count": 4
+    },
+    "raphide": {
+      "min": 16.73,
+      "max": 43.42,
+      "avg": 30.02,
+      "count": 4
+    }
+  },
+  "ZRC0564": {
+    "style": {
+      "min": 841.0,
+      "max": 1200.0,
+      "avg": 1022.0,
+      "count": 5
+    },
+    "c-sigma": {
+      "min": 21.0,
+      "max": 105.0,
+      "avg": 46.78,
+      "count": 5
+    },
+    "raphide": {
+      "min": 85.92,
+      "max": 134.1,
+      "avg": 112.56,
+      "count": 5
+    }
+  },
+  "ZRC0724": {
+    "oxea": {
+      "min": 150.0,
+      "max": 150.0,
+      "avg": 150.0,
+      "count": 1
+    }
+  },
+  "ZRC0637": {
+    "spongin sp": {
+      "min": 1.0,
+      "max": 5.0,
+      "avg": 3.0,
+      "count": 5
+    }
+  }
+}

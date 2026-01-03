@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SG Porifera Identifier</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .header-logo-container {
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header-logo {
+            max-height: 60px;
+            max-width: 140px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        h1 {
+            text-align: center;
+            color: #00d4ff;
+            margin: 0 30px;
+            flex-shrink: 0;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        .credits {
+            text-align: center;
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        .credits span {
+            color: #888;
+        }
+        .info-box {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+            width: 100%;
+        }
+        .info-box p {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.95em;
+        }
+        .spicule-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            width: 100%;
+        }
+        .spicule-card h3 {
+            color: #00d4ff;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .spicule-number {
+            background: #00d4ff;
+            color: #1a1a2e;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .form-group select,
+        .form-group input {
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1em;
+        }
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        .form-group select option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .checkbox-group label {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+        .variation-section {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px dashed rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+        .variation-section.active {
+            display: block;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .btn-add {
+            background: rgba(255,255,255,0.1);
+            color: #00d4ff;
+            border: 1px dashed #00d4ff;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .btn-add:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #fff;
+            width: 100%;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 15px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+        .btn-remove {
+            background: rgba(255, 100, 100, 0.2);
+            color: #ff6b6b;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            font-size: 0.85em;
+        }
+        .btn-remove:hover {
+            background: rgba(255, 100, 100, 0.3);
+        }
+
+        /* Results styles */
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            color: #00d4ff;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+        }
+        .back-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+        }
+        .input-summary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+        .input-summary h3 {
+            color: #00d4ff;
+            margin-top: 0;
+        }
+        .spicule-tag {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+        }
+        .results-section {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+        .results-section h2 {
+            color: #00d4ff;
+            margin-top: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        .match-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .match-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+            border-color: #00d4ff;
+        }
+        .match-card h4 {
+            color: #00d4ff;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .match-score {
+            background: #00d4ff;
+            color: #1a1a2e;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .match-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .detail-item {
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 6px;
+        }
+        .detail-item label {
+            color: #888;
+            font-size: 0.85em;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .detail-item span {
+            color: #fff;
+            font-weight: 500;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        .no-results .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #00d4ff;
+        }
+        #searchForm {
+            width: 100%;
+        }
+        #resultsView {
+            display: none;
+            width: 100%;
+        }
+        #detailView {
+            display: none;
+            width: 100%;
+        }
+        #searchView {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo-container">
+                <img src="images/tmsi_logo.png" alt="TMSI" class="header-logo">
+            </div>
+            <h1>SG Porifera Identifier</h1>
+            <div class="header-logo-container">
+                <img src="images/lkcnhm_logo.png" alt="LKCNHM" class="header-logo">
+            </div>
+        </div>
+        <p class="subtitle">Enter your spicule observations to find matching samples</p>
+        <p class="credits">By <span>Aneesh Bondugula</span>, <span>Neo Xuan Che</span> & <span>Dr Lim Swee Cheng</span></p>
+        
+        <!-- Search View -->
+        <div id="searchView">
+            <div class="info-box">
+                <p>📋 For each spicule type you observed, select the major type and subtype, enter the average length in micrometers (μm), and indicate if there are size variations.</p>
+            </div>
+            
+            <form id="searchForm">
+                <div id="spiculeContainer">
+                    <!-- Spicule cards will be added here -->
+                </div>
+                
+                <button type="button" class="btn btn-add" onclick="addSpicule()">
+                    + Add Another Spicule Type
+                </button>
+                
+                <button type="submit" class="btn btn-submit">
+                    🔍 Find Matching Samples
+                </button>
+            </form>
+        </div>
+        
+        <!-- Results View -->
+        <div id="resultsView">
+            <button class="back-btn" onclick="showSearch()">← Back to Search</button>
+            
+            <h1 style="width: 100%; margin-bottom: 10px;">Identification Results</h1>
+            <p class="subtitle">Based on your spicule observations</p>
+            
+            <div class="input-summary">
+                <h3>📋 Your Input</h3>
+                <div id="inputSummary"></div>
+            </div>
+            
+            <div class="results-section">
+                <h2>🎯 Matching Samples</h2>
+                <p style="color: #888; margin-bottom: 20px;">Samples ranked by spicule match. Samples with fewer extra spicule types rank higher.</p>
+                <div id="matchResults"></div>
+            </div>
+        </div>
+        
+        <!-- Sample Detail View -->
+        <div id="detailView">
+            <button class="back-btn" onclick="showResults(lastInputSpicules, lastMatches)">← Back to Results</button>
+            
+            <div id="detailContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Store last search for back navigation
+        let lastInputSpicules = [];
+        let lastMatches = [];
+        
+        // Spicule type definitions
+        const spiculeTypes = {
+            "style": {
+                subtypes: ["(none)", "tylo", "subtylo", "acantho", "rhabdo", "hastate"],
+                description: "Monaxon with one pointed end"
+            },
+            "oxea": {
+                subtypes: ["(none)", "strongyl", "bent", "curved", "spiny", "thick", "thin"],
+                description: "Monaxon pointed at both ends"
+            },
+            "sigma": {
+                subtypes: ["(none)", "c-sigma"],
+                description: "C or S-shaped microsclere"
+            },
+            "isochela": {
+                subtypes: ["(none)", "palmate", "birotulate", "aniso"],
+                description: "Anchor-shaped microsclere"
+            },
+            "strongyl": {
+                subtypes: ["(none)", "micro", "thin"],
+                description: "Monaxon with rounded ends"
+            },
+            "aster": {
+                subtypes: ["(none)", "oxyaster", "tylaster", "anthaster", "steraster", "oxyspheraster", "pseudaster"],
+                description: "Star-shaped spicule"
+            },
+            "triradiate": {
+                subtypes: ["(none)", "symmetrical rays"],
+                description: "Three-rayed spicule"
+            },
+            "triaene": {
+                subtypes: ["(none)", "ana", "pro", "dicho"],
+                description: "Spicule with cladome"
+            },
+            "toxa": {
+                subtypes: ["(none)"],
+                description: "Bow-shaped microsclere"
+            },
+            "raphide": {
+                subtypes: ["(none)"],
+                description: "Thin needle-like spicule"
+            },
+            "spiraster": {
+                subtypes: ["(none)", "thin"],
+                description: "Spiral spicule"
+            },
+            "tylote": {
+                subtypes: ["(none)"],
+                description: "Spicule with knobs at both ends"
+            }
+        };
+
+        // Global data
+        let spiculeDatabase = {};
+        let multiVariation = {};
+        let spiculeSizes = {};
+        let taxonomy = {};
+        let sampleImages = {};
+        let spiculeCount = 0;
+
+        // Load data on page load
+        async function loadData() {
+            try {
+                const [dbRes, mvRes, szRes, taxRes, imgRes] = await Promise.all([
+                    fetch('data/spicule_database.json'),
+                    fetch('data/multi_variation.json'),
+                    fetch('data/spicule_sizes.json'),
+                    fetch('data/taxonomy.json'),
+                    fetch('data/sample_images.json')
+                ]);
+                
+                spiculeDatabase = await dbRes.json();
+                multiVariation = await mvRes.json();
+                spiculeSizes = await szRes.json();
+                taxonomy = await taxRes.json();
+                sampleImages = await imgRes.json();
+                
+                console.log(`Loaded ${Object.keys(spiculeDatabase).length} samples`);
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        function normalizeSpiculeName(major, subtype) {
+            if (subtype && subtype !== '(none)') {
+                if (major === 'aster') {
+                    return `${subtype} euaster`;
+                } else if (major === 'triaene') {
+                    return `${subtype}triaene`;
+                } else if (major === 'triradiate') {
+                    // Handle typo in database: "symetrical" vs "symmetrical"
+                    return `triradiate ${subtype.replace('_', ' ').replace('symmetrical', 'symetrical')}`;
+                } else if (major === 'sigma') {
+                    // c-sigma is the full name, not c-sigmasigma
+                    return subtype;
+                } else {
+                    return `${subtype}${major}`;
+                }
+            }
+            return major;
+        }
+
+        function getBaseSpiculeType(name) {
+            let normalized = name.toLowerCase().replace(/-/g, '_').replace(/ /g, '_');
+            // Also normalize symmetrical/symetrical spelling
+            normalized = normalized.replace('symmetrical', 'symetrical');
+            const prefixes = ['large_', 'small_', 'big_', 'thin_', 'thick_', 'bent_', 'curved_', 
+                            'spiny_', 'protruding_', 'spined_', 'forked_'];
+            for (const prefix of prefixes) {
+                if (normalized.startsWith(prefix)) {
+                    normalized = normalized.substring(prefix.length);
+                }
+            }
+            return normalized;
+        }
+
+        function spiculeTypesMatch(inputType, sampleType) {
+            const inputNorm = inputType.toLowerCase().replace(/-/g, '_').replace(/ /g, '_');
+            const sampleNorm = sampleType.toLowerCase().replace(/-/g, '_').replace(/ /g, '_');
+            
+            if (inputNorm === sampleNorm) return true;
+            
+            const inputBase = getBaseSpiculeType(inputNorm);
+            const sampleBase = getBaseSpiculeType(sampleNorm);
+            
+            return inputBase === sampleBase;
+        }
+
+        function findMatchingSamples(inputSpicules) {
+            const matches = [];
+            
+            const inputTypes = inputSpicules.map(s => 
+                s.name.toLowerCase().replace(/ /g, '_').replace(/-/g, '_')
+            );
+            
+            if (inputTypes.length === 0) return [];
+            
+            for (const [sampleId, spiculeSet] of Object.entries(spiculeDatabase)) {
+                const sampleTypes = spiculeSet.map(s => s.toLowerCase().replace(/-/g, '_').replace(/ /g, '_'));
+                const sampleSizeData = spiculeSizes[sampleId] || {};
+                
+                let inputMatches = 0;
+                let matchedInput = [];
+                let multiSizeMatched = true;
+                let sizeMatchScore = 0;
+                let sizeMatchCount = 0;
+                let sizeDetails = [];
+                
+                for (const spicule of inputSpicules) {
+                    const inputType = spicule.name.toLowerCase().replace(/ /g, '_').replace(/-/g, '_');
+                    const baseType = getBaseSpiculeType(inputType);
+                    const userLength = spicule.length;
+                    
+                    let typeFound = false;
+                    for (const sampleType of sampleTypes) {
+                        if (spiculeTypesMatch(inputType, sampleType)) {
+                            typeFound = true;
+                            break;
+                        }
+                    }
+                    
+                    if (typeFound) {
+                        inputMatches++;
+                        matchedInput.push(inputType);
+                        
+                        // Check size match
+                        if (userLength) {
+                            const userLen = parseFloat(userLength);
+                            if (!isNaN(userLen)) {
+                                for (const [sizeType, sizeInfo] of Object.entries(sampleSizeData)) {
+                                    const sizeTypeNorm = sizeType.toLowerCase().replace(/-/g, '_').replace(/ /g, '_');
+                                    const base = baseType.replace(/_/g, '');
+                                    const sizeBase = sizeTypeNorm.replace(/_/g, '');
+                                    
+                                    const typeMatches = base.includes(sizeBase) || sizeBase.includes(base) ||
+                                                       spiculeTypesMatch(inputType, sizeTypeNorm);
+                                    
+                                    if (typeMatches) {
+                                        const minLen = sizeInfo.min || 0;
+                                        const maxLen = sizeInfo.max || Infinity;
+                                        const avgLen = sizeInfo.avg || 0;
+                                        
+                                        const tolerance = 0.2;
+                                        const rangeMin = minLen * (1 - tolerance);
+                                        const rangeMax = maxLen * (1 + tolerance);
+                                        
+                                        if (userLen >= rangeMin && userLen <= rangeMax) {
+                                            if (avgLen > 0) {
+                                                const closeness = 1 - Math.min(Math.abs(userLen - avgLen) / avgLen, 1);
+                                                sizeMatchScore += closeness;
+                                            }
+                                            sizeMatchCount++;
+                                            sizeDetails.push({
+                                                type: sizeType,
+                                                user: userLen,
+                                                range: `${minLen.toFixed(1)}-${maxLen.toFixed(1)}`,
+                                                avg: avgLen,
+                                                match: true
+                                            });
+                                        } else {
+                                            sizeDetails.push({
+                                                type: sizeType,
+                                                user: userLen,
+                                                range: `${minLen.toFixed(1)}-${maxLen.toFixed(1)}`,
+                                                avg: avgLen,
+                                                match: false
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // Check multi-size requirement
+                        if (spicule.hasVariation) {
+                            if (multiVariation[baseType]) {
+                                if (!multiVariation[baseType].includes(sampleId)) {
+                                    multiSizeMatched = false;
+                                }
+                            } else {
+                                multiSizeMatched = false;
+                            }
+                        }
+                    }
+                }
+                
+                if (inputMatches === 0) continue;
+                if (!multiSizeMatched) continue;
+                
+                const inputCoverage = inputMatches / inputTypes.length;
+                const extraSpicules = sampleTypes.length - inputMatches;
+                
+                if (inputCoverage >= 0.5) {
+                    const tax = taxonomy[sampleId] || {};
+                    const images = sampleImages[sampleId] || [];
+                    matches.push({
+                        sampleId,
+                        order: tax.order || 'Unknown',
+                        family: tax.family || 'Unknown',
+                        genus: tax.genus || 'Unknown',
+                        images: images.slice(0, 6),
+                        inputCoverage: Math.round(inputCoverage * 100),
+                        matchedCount: inputMatches,
+                        totalInput: inputTypes.length,
+                        sampleSpiculeCount: sampleTypes.length,
+                        extraSpicules,
+                        spicules: spiculeSet,
+                        sizeDetails,
+                        sizeMatches: sizeDetails.filter(s => s.match).length
+                    });
+                }
+            }
+            
+            // Sort: coverage > fewer extras > size matches
+            matches.sort((a, b) => {
+                if (b.inputCoverage !== a.inputCoverage) return b.inputCoverage - a.inputCoverage;
+                if (a.extraSpicules !== b.extraSpicules) return a.extraSpicules - b.extraSpicules;
+                return b.sizeMatches - a.sizeMatches;
+            });
+            
+            return matches.slice(0, 15);
+        }
+
+        function addSpicule() {
+            spiculeCount++;
+            const container = document.getElementById('spiculeContainer');
+            
+            let majorOptions = '<option value="">-- Select --</option>';
+            for (const [type, info] of Object.entries(spiculeTypes)) {
+                majorOptions += `<option value="${type}">${type.charAt(0).toUpperCase() + type.slice(1)}</option>`;
+            }
+            
+            const card = document.createElement('div');
+            card.className = 'spicule-card';
+            card.id = `spicule-${spiculeCount}`;
+            
+            card.innerHTML = `
+                <h3><span class="spicule-number">${spiculeCount}</span> Spicule Type ${spiculeCount}</h3>
+                ${spiculeCount > 1 ? `<button type="button" class="btn btn-remove" onclick="removeSpicule(${spiculeCount})">✕ Remove</button>` : ''}
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Major Type</label>
+                        <select name="spicule_${spiculeCount}_major" onchange="updateSubtypes(${spiculeCount})" required>
+                            ${majorOptions}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subtype</label>
+                        <select name="spicule_${spiculeCount}_subtype" id="subtype-${spiculeCount}">
+                            <option value="">-- Select Major Type First --</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Average Length (μm)</label>
+                        <input type="number" name="spicule_${spiculeCount}_length" step="0.1" min="0" placeholder="e.g., 150">
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="variation-check-${spiculeCount}" name="spicule_${spiculeCount}_has_variation" onchange="toggleVariation(${spiculeCount})">
+                    <label for="variation-check-${spiculeCount}" style="margin-bottom: 0; cursor: pointer;">
+                        Multiple size variations of this spicule type?
+                    </label>
+                </div>
+                
+                <div class="variation-section" id="variation-section-${spiculeCount}">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Second Variant Average Length (μm)</label>
+                            <input type="number" name="spicule_${spiculeCount}_length2" step="0.1" min="0" placeholder="e.g., 80">
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(card);
+        }
+
+        function updateSubtypes(spiculeNum) {
+            const majorSelect = document.querySelector(`select[name="spicule_${spiculeNum}_major"]`);
+            const subtypeSelect = document.getElementById(`subtype-${spiculeNum}`);
+            const majorType = majorSelect.value;
+            
+            if (majorType && spiculeTypes[majorType]) {
+                let options = '';
+                spiculeTypes[majorType].subtypes.forEach(subtype => {
+                    const value = subtype === '(none)' ? '' : subtype;
+                    options += `<option value="${value}">${subtype}</option>`;
+                });
+                subtypeSelect.innerHTML = options;
+            } else {
+                subtypeSelect.innerHTML = '<option value="">-- Select Major Type First --</option>';
+            }
+        }
+
+        function toggleVariation(spiculeNum) {
+            const checkbox = document.getElementById(`variation-check-${spiculeNum}`);
+            const section = document.getElementById(`variation-section-${spiculeNum}`);
+            
+            if (checkbox.checked) {
+                section.classList.add('active');
+            } else {
+                section.classList.remove('active');
+            }
+        }
+
+        function removeSpicule(spiculeNum) {
+            const card = document.getElementById(`spicule-${spiculeNum}`);
+            if (card) {
+                card.remove();
+            }
+        }
+
+        function showSearch() {
+            document.getElementById('searchView').style.display = 'flex';
+            document.getElementById('resultsView').style.display = 'none';
+            document.getElementById('detailView').style.display = 'none';
+        }
+
+        function showSampleDetail(sampleId) {
+            document.getElementById('searchView').style.display = 'none';
+            document.getElementById('resultsView').style.display = 'none';
+            document.getElementById('detailView').style.display = 'block';
+            
+            const tax = taxonomy[sampleId] || {};
+            const images = sampleImages[sampleId] || [];
+            const spicules = spiculeDatabase[sampleId] || [];
+            const sizes = spiculeSizes[sampleId] || {};
+            
+            const detailDiv = document.getElementById('detailContent');
+            detailDiv.innerHTML = `
+                <h1 style="color: #00d4ff; margin-bottom: 5px;">${tax.order || 'Unknown'} › ${tax.family || 'Unknown'} › ${tax.genus || 'Unknown'}</h1>
+                <p style="color: #888; margin-bottom: 20px;">Sample: ${sampleId}</p>
+                
+                <div class="results-section">
+                    <h2>📷 Sample Images (${images.length})</h2>
+                    ${images.length > 0 ? `
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px;">
+                            ${images.map(img => `
+                                <div style="background: rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden;">
+                                    <img src="${img}" style="width: 100%; height: 150px; object-fit: cover; cursor: pointer;" onclick="window.open('${img}', '_blank')">
+                                    <p style="padding: 8px; margin: 0; font-size: 0.8em; color: #888; text-align: center; word-break: break-all;">${img.split('/').pop()}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : '<p style="color: #888;">No images available for this sample.</p>'}
+                </div>
+                
+                <div class="results-section">
+                    <h2>🔬 Spicule Types</h2>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        ${spicules.map(s => `<span class="spicule-tag">${s}</span>`).join('')}
+                    </div>
+                </div>
+                
+                ${Object.keys(sizes).length > 0 ? `
+                    <div class="results-section">
+                        <h2>📏 Size Measurements</h2>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                            ${Object.entries(sizes).map(([type, info]) => `
+                                <div class="detail-item">
+                                    <label>${type}</label>
+                                    <span>${info.min.toFixed(1)} - ${info.max.toFixed(1)} μm</span>
+                                    <p style="margin: 5px 0 0 0; font-size: 0.85em; color: #888;">Avg: ${info.avg.toFixed(1)} μm (n=${info.count})</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function showResults(inputSpicules, matches) {
+            // Store for back navigation
+            lastInputSpicules = inputSpicules;
+            lastMatches = matches;
+            
+            document.getElementById('searchView').style.display = 'none';
+            document.getElementById('resultsView').style.display = 'block';
+            document.getElementById('detailView').style.display = 'none';
+            
+            // Show input summary
+            const summaryDiv = document.getElementById('inputSummary');
+            summaryDiv.innerHTML = inputSpicules.map(s => `
+                <span class="spicule-tag">
+                    ${s.name}
+                    ${s.length ? ` (${s.length}μm)` : ''}
+                    ${s.hasVariation ? ' [multi-size]' : ''}
+                </span>
+            `).join('');
+            
+            // Show matches
+            const resultsDiv = document.getElementById('matchResults');
+            
+            if (matches.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="no-results">
+                        <div class="icon">🔍</div>
+                        <h3>No Matches Found</h3>
+                        <p>Try adjusting your spicule criteria or adding fewer spicule types.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            resultsDiv.innerHTML = matches.map(match => `
+                <div class="match-card" onclick="showSampleDetail('${match.sampleId}')">
+                    <span class="match-score">${match.matchedCount}/${match.totalInput} of your spicules found</span>
+                    ${match.extraSpicules > 0 
+                        ? `<span class="match-score" style="background: #ff6b6b; margin-left: 10px;">+${match.extraSpicules} extra types in sample</span>`
+                        : `<span class="match-score" style="background: #00cc66; margin-left: 10px;">Exact match!</span>`
+                    }
+                    ${match.sizeMatches > 0 
+                        ? `<span class="match-score" style="background: #9933ff; margin-left: 10px;">${match.sizeMatches} size match${match.sizeMatches > 1 ? 'es' : ''}</span>`
+                        : ''
+                    }
+                    <h4>${match.order} › ${match.family} › ${match.genus}</h4>
+                    <p style="color: #888; font-size: 0.85em; margin: 5px 0 15px 0;">Sample: ${match.sampleId}</p>
+                    
+                    ${match.images.length > 0 ? `
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin-bottom: 15px;">
+                            ${match.images.slice(0, 4).map(img => `
+                                <img src="${img}" style="width: 100%; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">
+                            `).join('')}
+                            ${match.images.length > 4 ? `<div style="display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border-radius: 6px; color: #888; font-size: 0.85em;">+${match.images.length - 4} more</div>` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="match-details">
+                        <div class="detail-item">
+                            <label>Spicule Types in Sample (${match.sampleSpiculeCount} total)</label>
+                            <span>${match.spicules.join(', ')}</span>
+                        </div>
+                    </div>
+                    
+                    ${match.sizeDetails.length > 0 ? `
+                        <div style="margin-top: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;">
+                            <label style="color: #888; font-size: 0.85em; display: block; margin-bottom: 5px;">Size Comparison</label>
+                            ${match.sizeDetails.map(size => `
+                                <div style="margin: 5px 0; font-size: 0.9em;">
+                                    <span style="color: ${size.match ? '#00cc66' : '#ff6b6b'};">
+                                        ${size.match ? '✓' : '✗'}
+                                    </span>
+                                    ${size.type}: Your ${size.user}μm 
+                                    ${size.match ? 'within' : 'outside'}
+                                    range ${size.range}μm (avg: ${size.avg.toFixed(1)}μm)
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    <div style="margin-top: 15px; color: #00d4ff; font-size: 0.9em;">
+                        Click to view all images →
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Form submission
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const inputSpicules = [];
+            const cards = document.querySelectorAll('.spicule-card');
+            
+            cards.forEach((card, index) => {
+                const num = card.id.replace('spicule-', '');
+                const major = card.querySelector(`select[name="spicule_${num}_major"]`).value;
+                const subtype = card.querySelector(`select[name="spicule_${num}_subtype"]`).value;
+                const length = card.querySelector(`input[name="spicule_${num}_length"]`).value;
+                const hasVariation = card.querySelector(`input[name="spicule_${num}_has_variation"]`).checked;
+                
+                if (major) {
+                    inputSpicules.push({
+                        name: normalizeSpiculeName(major, subtype),
+                        major,
+                        subtype,
+                        length,
+                        hasVariation
+                    });
+                }
+            });
+            
+            const matches = findMatchingSamples(inputSpicules);
+            showResults(inputSpicules, matches);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            addSpicule();
+        });
+    </script>
+</body>
+</html>
